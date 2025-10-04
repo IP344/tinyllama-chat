@@ -1,0 +1,21 @@
+# --- Core Web Framework ---
+fastapi==0.115.2
+uvicorn[standard]==0.30.1
+
+# --- AI Model Handling ---
+transformers==4.44.2
+torch==2.4.0
+safetensors==0.4.4
+accelerate==0.33.0
+sentencepiece==0.2.0
+protobuf==5.27.2
+huggingface-hub==0.24.6
+
+# --- Utilities ---
+requests==2.32.3
+pydantic==2.8.2
+numpy==1.26.4
+
+# --- Optional (helps Render builds & logs) ---
+gunicorn==23.0.0
+python-multipart==0.0.9

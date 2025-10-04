@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TinyLlama Chatbot</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { font-family: Poppins, sans-serif; background: #0d1117; color: #fff; }
+    .container { max-width: 700px; margin: 60px auto; background: #161b22; border-radius: 16px; padding: 24px; box-shadow: 0 0 20px rgba(0,0,0,0.4); }
+    textarea { width: 100%; min-height: 80px; resize: none; border-radius: 10px; padding: 10px; font-size: 1rem; background: #0d1117; color: #fff; border: 1px solid #30363d; }
+    button { margin-top: 10px; background: #238636; border: none; padding: 10px 16px; color: #fff; border-radius: 8px; cursor: pointer; }
+    button:hover { background: #2ea043; }
+    .chat-box { background: #0d1117; border-radius: 10px; padding: 12px; height: 400px; overflow-y: auto; border: 1px solid #30363d; }
+    .msg { margin: 8px 0; padding: 8px 12px; border-radius: 10px; }
+    .user { background: #238636; align-self: flex-end; text-align: right; }
+    .bot { background: #30363d; text-align: left; }
+    .typing { color: #999; font-style: italic; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🤖 TinyLlama Chatbot</h1>
+    <div class="chat-box" id="chatBox"></div>
+
+    <textarea id="userInput" placeholder="Type your message..."></textarea>
+    <button id="sendBtn">Send</button>
+  </div>
+  
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,233 @@
+/* =========================
+   style.css — Minimal, modern, glassy
+   Works with the latest HTML you pasted
+   ========================= */
+
+/* Base reset */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+
+/* ---- Theme Tokens ---- */
+:root{
+  --bg: #0b1220;               /* page background (dark) */
+  --card: rgba(255,255,255,0.06);
+  --glass: rgba(255,255,255,0.08);
+  --border: rgba(255,255,255,0.12);
+  --text: #eaf0ff;
+  --text-dim: #9fb0d3;
+  --primary: #7aa2ff;
+  --primary-strong: #3e7bff;
+  --radius: 16px;
+  --shadow: 0 10px 30px rgba(0,0,0,0.35);
+  --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, "Ubuntu Mono", Consolas, "Liberation Mono", monospace;
+  --sans: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+/* Optional light mode (auto when user prefers) */
+@media (prefers-color-scheme: light){
+  :root{
+    --bg: #f6f8ff;
+    --card: rgba(10,16,38,0.06);
+    --glass: rgba(10,16,38,0.08);
+    --border: rgba(10,16,38,0.12);
+    --text: #0b1220;
+    --text-dim: #44506a;
+    --primary: #3e7bff;
+    --primary-strong: #235cff;
+  }
+}
+
+/* ---- Page ---- */
+body{
+  font-family: var(--sans);
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgba(82,120,255,0.20), transparent 60%),
+    radial-gradient(1000px 500px at 100% 0%, rgba(120,220,255,0.15), transparent 65%),
+    var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+/* ---- Layout Container ---- */
+.container{
+  width: 100%;
+  max-width: 880px;
+  display: grid;
+  gap: 18px;
+  text-align: center;
+}
+
+/* Header bits */
+h1{
+  font-size: clamp(1.3rem, 2.2vw + 1rem, 2rem);
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+.subtitle{
+  color: var(--text-dim);
+  font-size: 0.98rem;
+  margin-top: 4px;
+}
+
+/* ---- Cards ---- */
+.card,
+.output-card{
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Input card */
+.card{
+  text-align: left;
+  padding: 18px;
+  display: grid;
+  gap: 12px;
+}
+.card label{
+  font-size: 0.9rem;
+  color: var(--text-dim);
+}
+
+/* Textarea */
+#userPrompt{
+  width: 100%;
+  min-height: 140px;
+  resize: vertical;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--glass);
+  color: var(--text);
+  padding: 12px 14px;
+  font-size: 0.98rem;
+  line-height: 1.5;
+  outline: none;
+  transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
+}
+#userPrompt::placeholder{ color: color-mix(in oklab, var(--text-dim) 85%, transparent); }
+#userPrompt:focus{
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--primary) 25%, transparent);
+  background: rgba(255,255,255,0.10);
+}
+
+/* Generate button */
+#generateBtn{
+  justify-self: end;
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  background: linear-gradient(180deg, var(--primary), var(--primary-strong));
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: .2px;
+  cursor: pointer;
+  transition: transform .06s ease, filter .15s ease, box-shadow .15s ease;
+  box-shadow: 0 8px 20px rgba(62,123,255,0.35);
+}
+#generateBtn:hover{ filter: brightness(1.05); }
+#generateBtn:active{ transform: translateY(1px) scale(0.99); }
+#generateBtn:focus-visible{
+  outline: none;
+  box-shadow:
+    0 0 0 4px color-mix(in oklab, var(--primary) 25%, transparent),
+    0 8px 20px rgba(62,123,255,0.35);
+}
+
+/* Output card */
+.output-card{
+  text-align: left;
+  padding: 14px;
+  display: grid;
+  gap: 10px;
+}
+
+/* Output header (title + copy btn) */
+.output-header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-inline: 4px;
+}
+.output-header h2{
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+/* Copy button */
+#copyBtn{
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.05);
+  color: var(--text);
+  cursor: pointer;
+  transition: background .15s ease, border-color .15s ease, transform .06s ease;
+}
+#copyBtn:hover{
+  background: rgba(255,255,255,0.10);
+  border-color: color-mix(in oklab, var(--primary) 40%, var(--border));
+}
+#copyBtn:active{ transform: translateY(1px); }
+#copyBtn:focus-visible{
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--primary) 25%, transparent);
+}
+
+/* JSON output */
+#jsonOutput{
+  width: 100%;
+  max-height: 48vh;
+  overflow: auto;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: #0b1220; /* dark well to improve contrast */
+  padding: 14px;
+  font-family: var(--mono);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: #e6edff;
+  white-space: pre-wrap;  /* keeps wrapping on mobile */
+  word-break: break-word;
+}
+
+/* Scrollbars (nice but subtle) */
+#jsonOutput::-webkit-scrollbar,
+#userPrompt::-webkit-scrollbar{ width: 10px; height: 10px; }
+#jsonOutput::-webkit-scrollbar-thumb,
+#userPrompt::-webkit-scrollbar-thumb{
+  background: rgba(255,255,255,0.16);
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+#jsonOutput::-webkit-scrollbar-track,
+#userPrompt::-webkit-scrollbar-track{ background: transparent; }
+
+/* ---- Responsiveness ---- */
+@media (max-width: 700px){
+  .container{ gap: 14px; }
+  .card, .output-card{ padding: 14px; }
+  #generateBtn{ width: 100%; justify-self: stretch; }
+  #jsonOutput{ max-height: 50vh; }
+}
+
+/* ---- Reduced motion friendly ---- */
+@media (prefers-reduced-motion: reduce){
+  * { transition: none !important; animation: none !important; }
+}
+
+/* ---- Helpful focus style for keyboard users globally ---- */
+:focus-visible{
+  outline: 3px solid color-mix(in oklab, var(--primary) 35%, transparent);
+  outline-offset: 2px;
+  border-radius: 10px;
+}
